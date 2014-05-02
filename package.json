@@ -1,0 +1,19 @@
+{
+  "name": "gitpub",
+  "version": "0.0.0",
+  "description": "A simple git based micropub endpoint",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/bcomnes/gitpub.git"
+  },
+  "author": "Bret Comnes",
+  "license": "GPLv3",
+  "bugs": {
+    "url": "https://github.com/bcomnes/gitpub/issues"
+  },
+  "homepage": "https://github.com/bcomnes/gitpub"
+}
