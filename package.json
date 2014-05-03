@@ -4,7 +4,9 @@
   "description": "A simple git based micropub endpoint",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,15 @@
   "bugs": {
     "url": "https://github.com/bcomnes/gitpub/issues"
   },
-  "homepage": "https://github.com/bcomnes/gitpub"
+  "homepage": "https://github.com/bcomnes/gitpub",
+  "dependencies": {
+    "body-parser": "~1.0.0",
+    "cookie-parser": "~1.0.1",
+    "debug": "~0.7.4",
+    "express": "~4.0.0",
+    "jade": "~1.3.0",
+    "morgan": "~1.0.0",
+    "nodegit": "^0.1.3",
+    "static-favicon": "~1.0.0"
+  }
 }
