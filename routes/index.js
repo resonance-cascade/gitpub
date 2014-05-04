@@ -45,7 +45,7 @@ fs.exists(repoPath, function (exists){
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express', status: cloned  });
+  res.render('index', { title: 'Gitpub µPub Endpoint', status: cloned  });
 });
 
 module.exports = router;
