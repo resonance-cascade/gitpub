@@ -1,35 +1,40 @@
 var express = require('express');
 var router = express.Router();
-var git = require('nodegit');
-var clone = git.Repo.clone;
-var open = git.Repo.open;
+
 var fs = require('fs');
 var path = require('path');
 var url = require('url');
+
 var settings = require('../settings.js');
 
-var repoPath = 'repo/' + settings.git.repo.path;
+var Git = require('git-wrapper');
+var git = new Git({
+      'work-tree': settings.git.repo.worktree,
+      'git-dir': settings.git.repo.gitdir
+    });
+
+function clone (url, callback) {
+  var gitC = new Git();
+  gitC.exec('clone', null, [url], callback);
+}
+
+var repoPath = settings.git.repo.worktree;
+
+function deBug (err, msg) {
+  if (err) throw err;
+  console.log(msg || 'Cloned');
+}
+
 
 fs.exists(repoPath, function (exists){
   if (exists === true) {
-    console.log('aready cloned');
-    open(repoPath + '/.git', function(err, repo) {
-      if (err) throw err;
-      var remote = repo.getRemote("origin");
-      remote.connect(0, function(error) {
-        if (error) throw error;
-        remote.download(null, function(error) {
-          if (error) throw error;
-          console.log("It worked!");
-        });
-      });
-    })
+    // If the repo folder exists do something
+    console.log('aready cloned...');
+    git.exec('pull', deBug);
   } else {
-    clone(settings.git.repo.http, repoPath, null, function(err, repo) {
-      if (err) {
-        throw err;
-      } console.log('cloned!');
-    });
+    // If it does not exist clone it!
+    console.log('cloning...')
+    clone(settings.git.repo.ssh, deBug)
   }
 });
 
