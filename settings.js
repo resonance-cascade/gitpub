@@ -7,7 +7,7 @@ settings.git.repo = {};
 settings.web = {};
 
 settings.default_stuff =  ['red','green','blue','apple','yellow','orange','politics'];
-settings.git.repo.ssh = 'git@github.com:bcomnes/bcomnes.github.io.git';
+//settings.git.repo.ssh = 'git@github.com:bcomnes/bcomnes.github.io.git';
 settings.git.repo.http = 'https://github.com/bcomnes/bcomnes.github.io.git';
 settings.git.repo.path = 'bcomnes.github.io';
 settings.git.repo.worktree = path.join(__dirname, settings.git.repo.path);
