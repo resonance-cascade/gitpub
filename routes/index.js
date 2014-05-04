@@ -25,6 +25,7 @@ function deBug (err, msg) {
   console.log(msg || 'Cloned');
 }
 
+var cloned = false;
 
 fs.exists(repoPath, function (exists){
   if (exists === true) {
@@ -34,14 +35,17 @@ fs.exists(repoPath, function (exists){
   } else {
     // If it does not exist clone it!
     console.log('cloning...')
-    clone(settings.git.repo.ssh, deBug)
+    clone(settings.git.repo.http, function (err, msg) {
+      deBug(err,msg);
+      cloned = true;
+    });
   }
 });
 
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express', status: cloned  });
 });
 
 module.exports = router;
