@@ -48,4 +48,12 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Gitpub µPub Endpoint', status: cloned  });
 });
 
+router.post('/', function (req, res) {
+  console.log(req.body);
+  console.log(req.params);
+  console.log(req.query);
+  console.log(req.route);
+  console.log(req.get('Authorization'));
+})
+
 module.exports = router;
