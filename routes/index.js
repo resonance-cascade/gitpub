@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var debug = require('debug')('routes:index')
 
 var fs = require('fs');
 var path = require('path');
@@ -31,7 +32,10 @@ fs.exists(repoPath, function (exists){
   if (exists === true) {
     // If the repo folder exists do something
     console.log('aready cloned...');
-    git.exec('pull', deBug);
+    git.exec('pull', function (err, msg) {
+      deBug(err,msg);
+      cloned = true;
+    });
   } else {
     // If it does not exist clone it!
     console.log('cloning...')
@@ -54,6 +58,13 @@ router.post('/', function (req, res) {
   console.log(req.query);
   console.log(req.route);
   console.log(req.get('Authorization'));
+  verifyToken() {
+    if (valid) {
+      dostuff();
+    } else {
+      respondCorrectly();
+    }
+  }
 })
 
 module.exports = router;
