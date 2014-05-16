@@ -1,3 +1,4 @@
+
 {
   "name": "gitpub",
   "version": "0.0.0",
@@ -6,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "DEBUG=gitpub,routes:* ENV=development nodemon ./bin/www",
+    "production": "ENV=production node ./bin/www"
   },
   "repository": {
     "type": "git",
