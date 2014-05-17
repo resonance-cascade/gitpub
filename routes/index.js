@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var debug = require('debug')('routes:index')
+var debug = require('debug')('routes:index');
+var http = require('http');
 
 var fs = require('fs');
 var path = require('path');
