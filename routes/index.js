@@ -59,13 +59,6 @@ router.post('/', function (req, res) {
   console.log(req.query);
   console.log(req.route);
   console.log(req.get('Authorization'));
-  verifyToken() {
-    if (valid) {
-      dostuff();
-    } else {
-      respondCorrectly();
-    }
-  }
 })
 
 module.exports = router;
