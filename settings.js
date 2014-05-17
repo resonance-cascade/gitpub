@@ -14,4 +14,8 @@ settings.git.repo.worktree = path.join(__dirname, settings.git.repo.path);
 settings.git.repo.gitdir = path.join(settings.git.repo.worktree, ".git");
 settings.web.port = process.env.WEB_PORT || 9980;
 
+settings.authed = 'http://bret.io'
+
+settings.tokenUrl = 'https://tokens.oauth.net/token'
+
 module.exports = settings;

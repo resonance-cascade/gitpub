@@ -1,7 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var debug = require('debug')('routes:index');
-var http = require('http');
+var request = require ('request');
+var qs = require('querystring');
 
 var fs = require('fs');
 var path = require('path');
@@ -24,7 +25,7 @@ var repoPath = settings.git.repo.worktree;
 
 function deBug (err, msg) {
   if (err) throw err;
-  console.log(msg || 'Cloned');
+  debug(msg || 'Cloned');
 }
 
 var cloned = false;
@@ -32,14 +33,14 @@ var cloned = false;
 fs.exists(repoPath, function (exists){
   if (exists === true) {
     // If the repo folder exists do something
-    console.log('aready cloned...');
+    debug('aready cloned...');
     git.exec('pull', function (err, msg) {
       deBug(err,msg);
       cloned = true;
     });
   } else {
     // If it does not exist clone it!
-    console.log('cloning...')
+    debug('cloning...')
     clone(settings.git.repo.http, function (err, msg) {
       deBug(err,msg);
       cloned = true;
@@ -53,12 +54,43 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Gitpub µPub Endpoint', status: cloned  });
 });
 
+
 router.post('/', function (req, res) {
-  console.log(req.body);
-  console.log(req.params);
-  console.log(req.query);
-  console.log(req.route);
-  console.log(req.get('Authorization'));
+  
+  
+  var token = req.get('Authorization');
+  var postBody = qs.parse(req.body);
+  
+  var options = {
+    method: 'GET',
+    url: settings.tokenUrl,
+    headers: { 'Authorization': token }
+  }
+
+  function checkRes(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      var tokenData = qs.parse(body);
+      if (tokenData.me === settings.authed) {
+        var postPath = tokenData.me + '/testpost';
+        res.set('Location', postPath)
+        res.send(201, 'Created Post at ' + postPath)
+      } else {
+        res.send(403,'You gotta be authorized to do that')
+      }
+    } else {
+        res.send(500, error.name + ': ' + error.message || 'Something went terribly wrong');
+    }
+  }
+  if (token) {
+    request(options, checkRes);
+  } else {
+    res.send(401, 'Unauthorized: No token was provided');
+  }
+
 })
+
+function createPost(params) {
+  null;
+}
 
 module.exports = router;
