@@ -59,7 +59,6 @@ router.post('/', function (req, res) {
   
   
   var token = req.get('Authorization');
-  var postBody = qs.parse(req.body);
   
   var options = {
     method: 'GET',
@@ -71,9 +70,11 @@ router.post('/', function (req, res) {
     if (!error && response.statusCode === 200) {
       var tokenData = qs.parse(body);
       if (tokenData.me === settings.authed) {
-        var postPath = tokenData.me + '/testpost';
-        res.set('Location', postPath)
-        res.send(201, 'Created Post at ' + postPath)
+        createPost(req, function() {
+          var postPath = tokenData.me + '/testpost';
+          res.set('Location', postPath)
+          res.send(201, 'Created Post at ' + postPath)
+        })
       } else {
         res.send(403,'You gotta be authorized to do that')
       }
@@ -81,6 +82,8 @@ router.post('/', function (req, res) {
         res.send(500, error.name + ': ' + error.message || 'Something went terribly wrong');
     }
   }
+  
+
   if (token) {
     request(options, checkRes);
   } else {
@@ -89,8 +92,9 @@ router.post('/', function (req, res) {
 
 })
 
-function createPost(params) {
-  null;
+function createPost(req, callback) {
+  console.log(req.body);
+  callback();
 }
 
 module.exports = router;
