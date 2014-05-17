@@ -4,6 +4,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var debug = require('debug')('app');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -35,7 +36,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-console.log(app.get('env'));
+debug('env: ' + app.get('env'));
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
