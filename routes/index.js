@@ -93,6 +93,7 @@ router.post('/', function (req, res) {
 })
 
 function createPost(req, callback) {
+  console.log(req);
   console.log(req.body);
   callback();
 }
