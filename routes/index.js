@@ -72,7 +72,16 @@ router.post('/', busboy(), function (req, res) {
     if (!error && response.statusCode === 200) {
       var tokenData = qs.parse(body);
       if (tokenData.me === settings.authed) {
-        req.busboy.on('field', function(key, value, keyTruncated, valueTruncated) {
+        req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+          console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding);
+          file.on('data', function(data) {
+            console.log('File [' + fieldname + '] got ' + data.length + ' bytes');
+          });
+          file.on('end', function() {
+            console.log('File [' + fieldname + '] Finished');
+          });
+        });
+        req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
           console.log('Field [' + fieldname + ']: value: ' + inspect(val));
         });
         req.busboy.on('finish', function() {
