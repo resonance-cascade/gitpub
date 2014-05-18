@@ -4,6 +4,7 @@ var debug = require('debug')('routes:index');
 var request = require ('request');
 var qs = require('querystring');
 var busboy =  require('connect-busboy');
+var inspect = require('util').inspect;
 
 var fs = require('fs');
 var path = require('path');
@@ -72,17 +73,27 @@ router.post('/', busboy(), function (req, res) {
       var tokenData = qs.parse(body);
       if (tokenData.me === settings.authed) {
         req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-          console.log(fieldname, file, filename, encoding, mimetype);
+          console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding);
+          file.on('data', function(data) {
+            console.log('File [' + fieldname + '] got ' + data.length + ' bytes');
+          });
+          file.on('end', function() {
+            console.log('File [' + fieldname + '] Finished');
+          });
         });
         req.busboy.on('field', function(key, value, keyTruncated, valueTruncated) {
           console.log(key, value, keyTruncated, valueTruncated);
+          console.log('Field [' + fieldname + ']: value: ' + inspect(val));
+        });
+        busboy.on('finish', function() {
+          console.log('Done parsing form!');
+          createPost(req, function() {
+            var postPath = tokenData.me + '/testpost';
+            res.set('Location', postPath)
+            res.send(201, 'Created Post at ' + postPath)
+          })
         });
         req.pipe(req.busboy);
-        createPost(req, function() {
-          var postPath = tokenData.me + '/testpost';
-          res.set('Location', postPath)
-          res.send(201, 'Created Post at ' + postPath)
-        })
       } else {
         res.send(403,'You gotta be authorized to do that')
       }
