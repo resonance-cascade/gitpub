@@ -3,6 +3,7 @@ var router = express.Router();
 var debug = require('debug')('routes:index');
 var request = require ('request');
 var qs = require('querystring');
+var multiParse = require('../lib/middleware/multiParse');
 
 var fs = require('fs');
 var path = require('path');
@@ -55,7 +56,7 @@ router.get('/', function(req, res) {
 });
 
 
-router.post('/', function (req, res) {
+router.post('/', multiParse.parse(), function (req, res) {
   
   
   var token = req.get('Authorization');
