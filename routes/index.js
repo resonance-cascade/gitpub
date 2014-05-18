@@ -82,10 +82,9 @@ router.post('/', busboy(), function (req, res) {
           });
         });
         req.busboy.on('field', function(key, value, keyTruncated, valueTruncated) {
-          console.log(key, value, keyTruncated, valueTruncated);
           console.log('Field [' + fieldname + ']: value: ' + inspect(val));
         });
-        busboy.on('finish', function() {
+        req.busboy.on('finish', function() {
           console.log('Done parsing form!');
           createPost(req, function() {
             var postPath = tokenData.me + '/testpost';
