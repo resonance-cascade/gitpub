@@ -3,7 +3,7 @@ var router = express.Router();
 var debug = require('debug')('routes:index');
 var request = require ('request');
 var qs = require('querystring');
-var multiParse = require('../lib/middleware/multiParse');
+var busboy =  require('connect-busboy');
 
 var fs = require('fs');
 var path = require('path');
@@ -56,7 +56,7 @@ router.get('/', function(req, res) {
 });
 
 
-router.post('/', multiParse.parse(), function (req, res) {
+router.post('/', busboy(), function (req, res) {
   
   
   var token = req.get('Authorization');
@@ -71,6 +71,13 @@ router.post('/', multiParse.parse(), function (req, res) {
     if (!error && response.statusCode === 200) {
       var tokenData = qs.parse(body);
       if (tokenData.me === settings.authed) {
+        req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+          console.log(fieldname, file, filename, encoding, mimetype);
+        });
+        req.busboy.on('field', function(key, value, keyTruncated, valueTruncated) {
+          console.log(key, value, keyTruncated, valueTruncated);
+        });
+        req.pipe(req.busboy);
         createPost(req, function() {
           var postPath = tokenData.me + '/testpost';
           res.set('Location', postPath)
