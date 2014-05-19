@@ -60,9 +60,9 @@ router.get('/', function(req, res) {
 router.post('/', busboy(), function (req, res) {
   
   
-  var token = req.get('Authorization');
-  console.log(req);
-  
+  var token = req.get('Authorization' || 'access_token');
+  console.log(token);
+
   var options = {
     method: 'GET',
     url: settings.tokenUrl,
