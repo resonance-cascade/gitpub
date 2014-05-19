@@ -61,6 +61,7 @@ router.post('/', busboy(), function (req, res) {
   
   
   var token = req.get('Authorization');
+  console.log(req);
   
   var options = {
     method: 'GET',
