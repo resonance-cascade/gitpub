@@ -56,6 +56,7 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Gitpub µPub Endpoint', status: cloned  });
 });
 
+console.log(process.env.TESTVAR);
 
 router.post('/', busboy(), function (req, res) {
   
@@ -92,12 +93,14 @@ router.post('/', busboy(), function (req, res) {
         req.busboy.on('finish', function() {
           console.log('Done parsing form!');
           createPost(req, function() {
-            var postPath = tokenData.me + '/testpost';
-            res.set('Location', postPath)
-            res.send(201, 'Created Post at ' + postPath)
-            git.exec('status', function (err, msg) {
-              console.log(err);
-              console.log(msg);
+            git.exec('add',{A: true}, ['media'], function (err, msg) {
+              git.exec('commit', {m: true},  ['Ownyour gram posted file ' + filename], function(err,msg){
+                git.exec('push', null, ['origin', 'master'], function(err,msg){
+                  var postPath = tokenData.me + '/testpost';
+                  res.set('Location', postPath)
+                  res.send(201, 'Created Post at ' + postPath)
+                })
+              });
             });
           })
         });
