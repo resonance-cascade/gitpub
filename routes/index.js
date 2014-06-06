@@ -83,7 +83,7 @@ router.post('/', busboy(), function (req, res) {
           file.on('end', function() {
             console.log('File [' + fieldname + '] Finished');
           });
-          var saveTo = path.join('repoPath','media', path.basename(filename));
+          var saveTo = path.join(repoPath,'media', path.basename(filename));
           file.pipe(fs.createWriteStream(saveTo));
         });
         req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
