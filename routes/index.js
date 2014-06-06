@@ -62,8 +62,8 @@ router.post('/', busboy(), function (req, res) {
   
   var token = req.get('Authorization') || req.body.access_token;
   console.log(req.body);
-  console.log(req.body.access_token);
-  console.log(token);
+  console.log(req.body.access_token + " :access");
+  console.log(token + " :token");
 
   var options = {
     method: 'GET',
@@ -83,6 +83,8 @@ router.post('/', busboy(), function (req, res) {
           file.on('end', function() {
             console.log('File [' + fieldname + '] Finished');
           });
+          var saveTo = path.join('repoPath','media', path.basename(filename));
+          file.pipe(fs.createWriteStream(saveTo));
         });
         req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
           console.log('Field [' + fieldname + ']: value: ' + inspect(val));
@@ -93,6 +95,10 @@ router.post('/', busboy(), function (req, res) {
             var postPath = tokenData.me + '/testpost';
             res.set('Location', postPath)
             res.send(201, 'Created Post at ' + postPath)
+            git.exec('status', function (err, msg) {
+              console.log(err);
+              console.log(msg);
+            });
           })
         });
         req.pipe(req.busboy);
