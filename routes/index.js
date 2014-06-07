@@ -96,7 +96,7 @@ router.post('/', busboy(), function (req, res) {
           console.log('Done parsing form!');
           createPost(req, function() {
             git.exec('add',{A: true}, ['media'], function (err, msg) {
-              git.exec('commit', {m: true},  ['Ownyour gram posted file ' + filename], function(err,msg){
+              git.exec('commit', {m: true},  ['Ownyourgram posted a file'], function(err,msg){
                 git.exec('push', null, ['origin', 'master'], function(err,msg){
                   var postPath = tokenData.me + '/testpost';
                   res.set('Location', postPath)
