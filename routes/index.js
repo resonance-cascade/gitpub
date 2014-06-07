@@ -101,6 +101,7 @@ router.post('/', busboy(), function (req, res) {
                   var postPath = tokenData.me + '/testpost';
                   res.set('Location', postPath)
                   res.send(201, 'Created Post at ' + postPath)
+                  console.log(err, msg)
                 })
               });
             });
