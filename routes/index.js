@@ -98,7 +98,7 @@ router.post('/', busboy(), function (req, res) {
             git.exec('add',{A: true}, ['media'], function (err, msg) {
               console.log(err);
               console.log(msg);
-              git.exec('commit', {m: true},  ['Ownyourgram posted a file'], function(err,msg){
+              git.exec('commit', {m: true},  ["'Ownyourgram posted a file'"], function(err,msg){
                 console.log(err);
                 console.log(msg);
                 git.exec('push', null, ['origin', 'master'], function(err,msg){
