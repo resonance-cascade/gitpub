@@ -32,6 +32,8 @@ function deBug (err, msg) {
 
 var cloned = false;
 
+var authedHttp = 'https://' + process.env.USERNAME + ':' + process.env.PASSWORD + '@github.com/bcomnes/bcomnes.github.io.git'
+
 fs.exists(repoPath, function (exists){
   if (exists === true) {
     // If the repo folder exists do something
@@ -43,7 +45,7 @@ fs.exists(repoPath, function (exists){
   } else {
     // If it does not exist clone it!
     debug('cloning...')
-    clone(settings.git.repo.http, function (err, msg) {
+    clone(authedHttp, function (err, msg) {
       deBug(err,msg);
       cloned = true;
     });
