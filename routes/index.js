@@ -102,7 +102,7 @@ router.post('/', busboy(), function (req, res) {
         req.busboy.on('finish', function() {
           console.log('Done parsing form!');
           createPost(req, incomingData,  function() {
-            git.exec('add',{A: true}, ['media'], function (err, msg) {
+            git.exec('add',{A: true}, ['media', '_posts/ownyourgram'], function (err, msg) {
               console.log(err);
               console.log(msg);
               git.exec('commit', {m: true},  ["'Ownyourgram posted a file'"], function(err,msg){
