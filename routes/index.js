@@ -91,7 +91,7 @@ router.post('/', busboy(), function (req, res) {
         var incomingData = {};
         req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
           incomingData.filename = filename;
-          incomingdata.encoding = encoding;
+          incomingData.encoding = encoding;
           console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding);
           file.on('data', function(data) {
             console.log('File [' + fieldname + '] got ' + data.length + ' bytes');
@@ -104,7 +104,7 @@ router.post('/', busboy(), function (req, res) {
         });
         req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
           console.log('Field [' + fieldname + ']: value: ' + inspect(val));
-          incomingdata[fieldname] = inspect(val);
+          incomingData[fieldname] = inspect(val);
         });
         req.busboy.on('finish', function() {
           console.log('Done parsing form!');
