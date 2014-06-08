@@ -139,8 +139,7 @@ function createPost(req, incomingData, callback) {
   var jekyllPostFile = path.join(settings.git.repo.worktree, '_posts', 'ownyourgram',jekyllName);
   var postContents = ejs.render(template, incomingData);
   var rendered = ejs.render(template, incomingData);
-  fs.writeFile(jekyllPostFile, postContents, function(err) { if (err) throw err; console.log('I did it')});
-  callback();
+  fs.writeFile(jekyllPostFile, postContents, function(err) { if (err) throw err; console.log('I did it'); callback();});
 }
 
   if (token) {
