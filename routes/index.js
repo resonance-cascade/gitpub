@@ -7,6 +7,7 @@ var busboy =  require('connect-busboy');
 var inspect = require('util').inspect;
 var ejs = require('ejs');
 var moment = require('moment');
+var fs = require('fs');
 
 var fs = require('fs');
 var path = require('path');
@@ -94,7 +95,7 @@ router.post('/', busboy(), function (req, res) {
             console.log('File [' + fieldname + '] Finished');
           });
           var saveTo = path.join(repoPath,'media', 'ownyourgram', path.basename(filename));
-          //file.pipe(fs.createWriteStream(saveTo));
+          file.pipe(fs.createWriteStream(saveTo));
         });
         req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
           console.log('Field [' + fieldname + ']: value: ' + inspect(val));
@@ -135,7 +136,10 @@ function createPost(req, incomingData, callback) {
   var fileTitle = incomingData.content.toLowerCase().replace(/[^a-z0-9]+/gi,'-').replace(/-$/,'');
   var date = moment(incomingData.published);
   var jekyllName = date.format('YYYY-MM-DD') + '-' + fileTitle + '.md'
-  console.log(jekyllName);
+  var jekyllPostFile = path.join(settings.git.repo.worktree, '_posts', 'ownyourgram',jekyllName);
+  var postContents = ejs.render(template, incomingData);
+  var rendered = ejs.render(template, incomingData);
+  fs.writeFile(jekyllPostFile, postContents, function(err) { if (err) throw err; console.log('I did it')});
   callback();
 }
 
