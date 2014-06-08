@@ -98,7 +98,7 @@ router.post('/', busboy(), function (req, res) {
         });
         req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
           console.log('Field [' + fieldname + ']: value: ' + inspect(val));
-          incomingData[fieldname] = inspect(val);
+          incomingData[fieldname] = val;
         });
         req.busboy.on('finish', function() {
           console.log('Done parsing form!');
