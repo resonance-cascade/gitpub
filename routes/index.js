@@ -79,13 +79,6 @@ router.post('/', busboy(), function (req, res) {
 
   function checkRes(error, response, body) {
     var incomingData = {};
-    function createPost(req, callback) {
-      var fileTitle = incomingData.content.toLowerCase().replace(/[^a-z0-9]+/gi,'-').replace(/-$/,'');
-      var date = moment(incomingData.published);
-      var jekyllName = date.format('YYYY-MM-DD') + '-' + fileTitle + '.md'
-      console.log(jekyllName);
-      callback();
-    }
     if (!error && response.statusCode === 200) {
       var tokenData = qs.parse(body);
       if (tokenData.me === settings.authed) {
@@ -109,8 +102,7 @@ router.post('/', busboy(), function (req, res) {
         });
         req.busboy.on('finish', function() {
           console.log('Done parsing form!');
-          console.log(ejs.render(template, incomingData));
-          createPost(req, function() {
+          createPost(req, incomingData, function() {
             git.exec('add',{A: true}, ['media'], function (err, msg) {
               console.log(err);
               console.log(msg);
@@ -137,6 +129,14 @@ router.post('/', busboy(), function (req, res) {
     }
   }
   
+
+function createPost(req, incomingData, callback) {
+  var fileTitle = incomingData.content.toLowerCase().replace(/[^a-z0-9]+/gi,'-').replace(/-$/,'');
+  var date = moment(incomingData.published);
+  var jekyllName = date.format('YYYY-MM-DD') + '-' + fileTitle + '.md'
+  console.log(jekyllName);
+  callback();
+}
 
   if (token) {
     request(options, checkRes);
