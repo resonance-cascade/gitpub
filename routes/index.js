@@ -13,7 +13,7 @@ var path = require('path');
 var url = require('url');
 
 var settings = require('../settings.js');
-//var template = fs.readFileSync(path.join(__dirname,'postTemplate.ejs'), 'utf8');
+var template = fs.readFileSync(path.join(__dirname,'postTemplate.ejs'), 'utf8');
 
 var Git = require('git-wrapper');
 var git = new Git({
