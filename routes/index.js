@@ -62,15 +62,13 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Gitpub µPub Endpoint', status: cloned  });
 });
 
-console.log(process.env.TESTVAR);
-
 router.post('/', busboy(), function (req, res) {
   
   
   var token = req.get('Authorization') || req.body.access_token;
-  console.log(req.body);
-  console.log(req.body.access_token + " :access");
-  console.log(token + " :token");
+  //console.log(req.body);
+  //console.log(req.body.access_token + " :access");
+  //console.log(token + " :token");
 
   var options = {
     method: 'GET',
@@ -132,7 +130,6 @@ router.post('/', busboy(), function (req, res) {
   
 
 function createPost(req, incomingData, callback) {
-  console.log(incomingData);
   var fileTitle = incomingData.content.toLowerCase().replace(/[^a-z0-9]+/gi,'-').replace(/-$/,'');
   var date = moment(incomingData.published);
   var jekyllName = date.format('YYYY-MM-DD') + '-' + fileTitle + '.md'
