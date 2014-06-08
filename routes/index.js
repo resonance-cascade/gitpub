@@ -5,12 +5,14 @@ var request = require ('request');
 var qs = require('querystring');
 var busboy =  require('connect-busboy');
 var inspect = require('util').inspect;
+var ejs = require('ejs');
 
 var fs = require('fs');
 var path = require('path');
 var url = require('url');
 
 var settings = require('../settings.js');
+var template = fs.readFileSync(path.join(__dirname,'../views/postTemplate.ejs'), 'utf8');
 
 var Git = require('git-wrapper');
 var git = new Git({
@@ -75,10 +77,21 @@ router.post('/', busboy(), function (req, res) {
   }
 
   function checkRes(error, response, body) {
+    var incomingData = {};
+    function createPost(req, callback) {
+      var fileTitle = incomingData.content.toLowerCase().replace(/[^a-z0-9]+/gi,'-').replace(/-$/,'');
+      var date = moment(incomingData.published);
+      var jekyllName = date.format('YYYY-MM-DD') + '-' + fileTitle + '.md'
+      console.log(jekyllName);
+      callback();
+    }
     if (!error && response.statusCode === 200) {
       var tokenData = qs.parse(body);
       if (tokenData.me === settings.authed) {
+        var incomingData = {};
         req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+          incomingData.filename = filename;
+          incomingdata.encoding = encoding;
           console.log('File [' + fieldname + ']: filename: ' + filename + ', encoding: ' + encoding);
           file.on('data', function(data) {
             console.log('File [' + fieldname + '] got ' + data.length + ' bytes');
@@ -86,14 +99,16 @@ router.post('/', busboy(), function (req, res) {
           file.on('end', function() {
             console.log('File [' + fieldname + '] Finished');
           });
-          var saveTo = path.join(repoPath,'media', path.basename(filename));
-          file.pipe(fs.createWriteStream(saveTo));
+          var saveTo = path.join(repoPath,'media', 'ownyourgram', path.basename(filename));
+          //file.pipe(fs.createWriteStream(saveTo));
         });
         req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
           console.log('Field [' + fieldname + ']: value: ' + inspect(val));
+          incomingdata[fieldname] = inspect(val);
         });
         req.busboy.on('finish', function() {
           console.log('Done parsing form!');
+          console.log(ejs.render(template, incomingData));
           createPost(req, function() {
             git.exec('add',{A: true}, ['media'], function (err, msg) {
               console.log(err);
@@ -129,10 +144,5 @@ router.post('/', busboy(), function (req, res) {
   }
 
 })
-
-function createPost(req, callback) {
-  console.log(req.body);
-  callback();
-}
 
 module.exports = router;
