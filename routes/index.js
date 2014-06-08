@@ -102,7 +102,7 @@ router.post('/', busboy(), function (req, res) {
         });
         req.busboy.on('finish', function() {
           console.log('Done parsing form!');
-          createPost(req, incomingData, function() {
+          createPost(req, incomingData,  function() {
             git.exec('add',{A: true}, ['media'], function (err, msg) {
               console.log(err);
               console.log(msg);
@@ -131,6 +131,7 @@ router.post('/', busboy(), function (req, res) {
   
 
 function createPost(req, incomingData, callback) {
+  console.log(incomingData);
   var fileTitle = incomingData.content.toLowerCase().replace(/[^a-z0-9]+/gi,'-').replace(/-$/,'');
   var date = moment(incomingData.published);
   var jekyllName = date.format('YYYY-MM-DD') + '-' + fileTitle + '.md'
