@@ -1,0 +1,8 @@
+{
+  "domain": "http://bret.io",
+  "github": {
+    "user": "bcomnes",
+    "repo": "bcomnes.github.io"
+  },
+  "tokenUrl": "https://tokens.oauth.net/token"
+}

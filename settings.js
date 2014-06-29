@@ -1,21 +1,18 @@
-var settings = {}
-var url = require('url');
+var config = require('./config.json');
 var path = require('path');
 
-settings.git = {};
-settings.git.repo = {};
-settings.web = {};
+function clone(o) {
+  var ret = {};
+  Object.keys(o).forEach(function (val) {
+    ret[val] = o[val];
+  });
+  return ret;
+}
 
-settings.default_stuff =  ['red','green','blue','apple','yellow','orange','politics'];
-//settings.git.repo.ssh = 'git@github.com:bcomnes/bcomnes.github.io.git';
-settings.git.repo.http = 'https://github.com/bcomnes/bcomnes.github.io.git';
-settings.git.repo.path = 'bcomnes.github.io';
-settings.git.repo.worktree = path.join(__dirname, settings.git.repo.path);
-settings.git.repo.gitdir = path.join(settings.git.repo.worktree, ".git");
-settings.web.port = process.env.WEB_PORT || 9980;
+var settings = clone(config);
 
-settings.authed = 'http://bret.io'
-
-settings.tokenUrl = 'https://tokens.oauth.net/token'
+settings.repo = 'https://github.com/' + config.github.user + '/' + config.github.repo + '.git';
+settings.worktree = path.join(__dirname, 'repo', settings.github.repo);
+settings.gitdir = path.join(settings.worktree, 'repo', '.git');
 
 module.exports = settings;
