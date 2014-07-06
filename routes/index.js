@@ -1,3 +1,4 @@
+// Gitpub Default Route
 var express = require('express');
 var router = express.Router();
 var debug = require('debug')('routes:index');
@@ -72,6 +73,7 @@ router.post('/', busboy(), function (req, res) {
       var tokenData = qs.parse(body);
 
       if (tokenData.me === settings.domain) {
+        // TODO:  Figure out if multipart or form encoded
         var incomingData = {};
 
         req.busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
@@ -96,6 +98,7 @@ router.post('/', busboy(), function (req, res) {
         req.busboy.on('finish', function() {
           console.log('Done parsing form!');
           createPost(req, incomingData,  function() {
+            // TODO Pull here.
             git.exec('add',{A: true}, ['media', '_posts/ownyourgram'], function (err, msg) {
               console.log(err);
               console.log(msg);

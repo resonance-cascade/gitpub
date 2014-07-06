@@ -1,29 +1,30 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var debug = require('debug')('app');
+var logger = require('morgan'); 
+var bodyParser = require('body-parser');  // Does not handle multipart
+var debug = require('debug')('app'); // Isn't there a simpler debug logger out there?
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var routes = require('./routes/index'); 
+var routes = require('./routes/micropub')
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
+// Default express stuff
 app.use(favicon());
 app.use(logger('dev'));
-app.use(bodyParser.json());
+// We are parsing all incloming forms before anything...
+// TODO: Figure out if this is bad or not
+app.use(body-parser.json());
 app.use(bodyParser.urlencoded());
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Routes
 app.use('/', routes);
-app.use('/users', users);
+app.use('/micropub', micropub);
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
@@ -57,4 +58,4 @@ app.use(function(err, req, res, next) {
     });
 });
 
-module.exports = app;
+module.exports = app;  // TODO: What is this all about?

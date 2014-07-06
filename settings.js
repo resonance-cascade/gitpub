@@ -13,6 +13,7 @@ var settings = clone(config);
 
 settings.repo = 'https://github.com/' + config.github.user + '/' + config.github.repo + '.git';
 settings.worktree = path.join(__dirname, 'repo', settings.github.repo);
-settings.gitdir = path.join(settings.worktree, 'repo', '.git');
+settings.gitdir = path.join(settings.worktree, '.git');
+settings.remoteBranch = [config.remote || 'origin', config.branch || 'master'];
 
 module.exports = settings;

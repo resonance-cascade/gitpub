@@ -14,7 +14,7 @@
     "url": "git://github.com/bcomnes/gitpub.git"
   },
   "author": "Bret Comnes",
-  "license": "GPLv3",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/bcomnes/gitpub/issues"
   },
