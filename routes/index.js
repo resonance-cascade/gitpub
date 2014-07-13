@@ -59,6 +59,14 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Gitpub µPub Endpoint', status: cloned  });
 });
 
+router.post('/',  authorize(), 
+                  multiParse(), 
+                  stagePost(), 
+                  publishPost(), 
+                  function(res, req) {
+                    // Report sucessful posting here.
+                  });
+
 router.post('/', busboy(), function (req, res) {
   var token = req.get('Authorization') || req.body.access_token;
 
