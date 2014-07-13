@@ -3,6 +3,7 @@ var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan'); 
 var bodyParser = require('body-parser');  // Does not handle multipart
+var busboy =  require('connect-busboy');
 var debug = require('debug')('app'); // Isn't there a simpler debug logger out there?
 
 var routes = require('./routes/index'); 
@@ -20,6 +21,7 @@ app.use(logger('dev'));
 // TODO: Figure out if this is bad or not
 app.use(body-parser.json());
 app.use(bodyParser.urlencoded());
+app.use(busboy());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
