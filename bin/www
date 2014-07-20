@@ -1,9 +1,14 @@
 #!/usr/bin/env node
 var debug = require('debug')('gitpub');
 var app = require('../app');
+var settings = require('../settings');
+
+var Repo = require('../lib/repo');
 
 app.set('port', process.env.PORT || 3000);
 
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
+  app.locals.repo = new Repo(settings);
+  app.locals.init;
 });
