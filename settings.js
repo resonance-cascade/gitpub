@@ -1,9 +1,6 @@
 var config = require('./config.json');
 var path = require('path');
 
-// Default Values
-settings.mediaFolder = 'media';
-
 var settings = clone(config);
 
 // Full URL to git repo
