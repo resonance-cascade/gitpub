@@ -15,7 +15,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 app.use(favicon());
 app.use(logger('dev'));
-app.use(body-parser.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(busboy());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -36,7 +36,7 @@ app.use(function(req, res, next) {
 
 /// error handlers
 
-// development error handler
+// development error handlers
 // will print stacktrace
 debug('env: ' + app.get('env'));
 if (app.get('env') === 'development') {
