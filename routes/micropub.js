@@ -14,11 +14,11 @@ router.get('/', function(req, res) {
 });
 
 //router.post('/',  authorize(),
-                  multiParse(),
-                  stagePost(),
-                  publishPost(),
-                  function(res, req) {
-                    // Report sucessful posting here.
-                  });
-
+//                  multiParse(),
+//                  stagePost(),
+//                  publishPost(),
+//                  function(res, req) {
+//                    // Report sucessful posting here.
+//                  });
+//
 module.exports = router;
