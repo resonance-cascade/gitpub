@@ -4,7 +4,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');  // Does not handle multipart
 var busboy =  require('connect-busboy');
-var debug = require('debug')('app'); // Isn't there a simpler debug logger out there?
+var debug = require('debug')('gitpub:app'); // Isn't there a simpler debug logger out there?
 
 var routes = require('./routes/index');
 var micropub = require('./routes/micropub');

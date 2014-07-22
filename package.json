@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/www",
-    "dev": "ENV=development node ./bin/www",
+    "dev": "DEBUG=gitpub:*,routes:*,lib:* ENV=development node ./bin/www",
     "production": "ENV=production node ./bin/www"
   },
   "repository": {
