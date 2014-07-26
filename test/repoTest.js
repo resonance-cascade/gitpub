@@ -4,7 +4,7 @@ var repo = new Repo(settings);
 var inspect = require('util').inspect;
 var debug = require('debug')('test:repoTest');
 
-repo.clone(function () {
+repo.init(function () {
   debug('Initialized');
 })
 
