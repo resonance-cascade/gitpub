@@ -1,10 +1,9 @@
 // Micropub route
 var express = require('express');
 var router = express.Router();
-var debug = require('debug')('routes:index');
 
-//var authorize = require('../lib/authorize');
-//var multiParse = require('../lib/multiParse');
+var authorize = require('../lib/authorize');
+var multiParse = require('../lib/multiParse');
 //var stagePost = require('../lib/stagePost');
 //var publishPost = require('../lib/publishPost);
 
