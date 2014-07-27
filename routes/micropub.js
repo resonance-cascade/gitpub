@@ -25,7 +25,7 @@ router.get('/post', function(req, res) {
   res.render('post');
 });
 
-router.post('/post' , multiParse, function(req, res) {
+router.post('/post',authorize,multiParse, function(req, res) {
   if (req.body) console.log(req.body);
   if (req.token) console.log(req.token);
   if (req.files) console.log(req.files);
