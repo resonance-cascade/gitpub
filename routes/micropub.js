@@ -12,12 +12,24 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Gitpub µPub Endpoint' });
 });
 
-//router.post('/',  authorize(),
-//                  multiParse(),
-//                  stagePost(),
-//                  publishPost(),
+//router.post('/',  authorize,
+//                  multiParse,
+//                  stagePost,
+//                  publishPost,
 //                  function(res, req) {
 //                    // Report sucessful posting here.
 //                  });
 //
+
+router.get('/post', function(req, res) {
+  res.render('post');
+});
+
+router.post('/post' , multiParse, function(req, res) {
+  if (req.body) console.log(req.body);
+  if (req.token) console.log(req.token);
+  if (req.files) console.log(req.files);
+  res.redirect('post');
+})
+
 module.exports = router;
