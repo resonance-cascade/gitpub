@@ -6,7 +6,7 @@ block content
   p Cloned? #{status}
 
 
-  form(action="post", method="post")
+  form(action="post", method="post", enctype="multipart/form-data")
     p Content
     textarea(type="text", name="content"  cols="20" rows="4" )
     p in-reply-to
