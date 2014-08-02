@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./bin/www",
-    "dev": "DEBUG=gitpub*,routes:*,lib:* ENV=development nodemon ./bin/www",
+    "dev": "DEBUG=gitpub*,routes:*,lib:* ENV=development node ./bin/www",
+    "devmon": "DEBUG=gitpub*,routes:*,lib:* ENV=development nodemon ./bin/www",
     "debug": "DEBUG=gitpub*,routes:*,lib:* ENV=development node-debug ./bin/www",
     "windev": "win-spawn DEBUG=gitpub*,routes:*,lib:* ENV=development nodemon ./bin/www",
     "production": "ENV=production node ./bin/www"
