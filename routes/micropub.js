@@ -19,11 +19,7 @@ router.get('/', function(req, res) {
 });
 
 /* POST micropub */
-router.post('/',  authorize,
-                  multiParse,
-                  stagePost,
-                  publishPost,
-                  function(res, req) {
+router.post('/',  authorize,multiParse,stagePost,publishPost,function(res, req) {
   res.set('Location', url.parse([settings.domain + req.slug].join('')));
   res.status(201).send('Created Post at ' + [settings.domain + req.slug].join(''));
                   });
