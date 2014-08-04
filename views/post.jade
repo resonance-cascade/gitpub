@@ -6,7 +6,7 @@ block content
   p Cloned? #{status}
 
 
-  form(action="post", method="post", enctype="multipart/form-data")
+  form(action="post", method="post")
     p Content
     textarea(type="text", name="content"  cols="20" rows="4" )
     p in-reply-to
@@ -17,8 +17,6 @@ block content
       input(type="text", name="slug")
     p location
       input(type="text", name="location")
-    p upload
-      input(type="file" name="a-file")
     p token
       input(type="text" name="access_token")
     input(type="submit" name="post" value="Post")
