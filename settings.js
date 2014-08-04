@@ -4,7 +4,11 @@ var path = require('path');
 var settings = clone(config);
 
 // Full URL to git repo
-settings.repo = 'https://github.com/' + config.github.user + '/' + config.github.repo + '.git';
+if (process.env.ENV === 'development') {
+  settings.repo = 'git@github.com:' + config.github.user + '/' + config.github.repo + '.git';
+} else {
+  settings.repo = 'https://github.com/' + config.github.user + '/' + config.github.repo + '.git';
+}
 // Path to git repo on disk
 settings.worktree = path.join(__dirname, 'repo', settings.github.repo);
 // Path to .git dir in git repo
