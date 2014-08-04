@@ -9,9 +9,13 @@ An experimental publishing tool that takes incoming http requests and turns them
 
 - [micropub](http://indiewebcamp.com/micropub) (posting)
 - Simple File handling for small files in git.
+- Support for a simple jekyll post schema.
 
 Future plans:
 
 - [micropub](http://indiewebcamp.com/micropub) (editing)
 - [webmention](http://indiewebcamp.com/micropub)
 - Robust file handling (S3, Dropbox, Bittorrent Sync, [Camlistore](https://camlistore.org/))
+- Advanced syndication options ([POSSE]() [PESOS]())
+- Support for arbitrary post templates and schema.
+- Static Site Generator Agnostic
