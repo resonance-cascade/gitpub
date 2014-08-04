@@ -19,3 +19,4 @@ Future plans:
 - Advanced syndication options ([POSSE]() [PESOS]())
 - Support for arbitrary post templates and schema.
 - Static Site Generator Agnostic
+- Site Provisioning
