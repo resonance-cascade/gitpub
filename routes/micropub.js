@@ -24,7 +24,8 @@ router.post('/',  authorize,
                   stagePost,
                   publishPost,
                   function(res, req) {
-                    // Report sucessful posting here.
+  res.set('Location', url.parse([settings.domain + req.slug].join('')));
+  res.status(201).send('Created Post at ' + [settings.domain + req.slug].join(''));
                   });
 
 /* GET Test Form */
