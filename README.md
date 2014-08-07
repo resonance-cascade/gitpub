@@ -5,7 +5,7 @@ gitpub
 [![Dependency Status](https://gemnasium.com/bcomnes/gitpub.svg)](https://gemnasium.com/bcomnes/gitpub)
 
 
-An experimental publishing tool that takes incoming http requests and turns them into content inside a remote git repository for later consumption by a static site generator running in a [gh-pages](https://pages.github.com/) like environment.
+An experimental publishing tool that takes incoming http requests, authorizes them and then turns them into content inside a remote git repository for later consumption by a static site generator running in a [gh-pages](https://pages.github.com/) like environment or a dynamic web app that renders content from static files on disk.
 
 ## Currently Working
 
