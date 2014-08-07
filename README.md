@@ -15,8 +15,10 @@ An experimental publishing tool that takes incoming http requests and turns them
 
 ## On the table:
 
+- Documentation:  Micropub is still a baby.
 - Work out all the kinks.
 - Testing
+- Example Jekyll Template.
 
 ## Future plans:
 
@@ -25,5 +27,6 @@ An experimental publishing tool that takes incoming http requests and turns them
 - Robust file handling (S3, Dropbox, Bittorrent Sync, [Camlistore](https://camlistore.org/))
 - Advanced syndication options ([POSSE](http://indiewebcamp.com/POSSE) [PESOS](http://indiewebcamp.com/PESOS))
 - Support for arbitrary post templates and schema.
+- Flexible pathing.
 - Static Site Generator Agnostic
 - Site Provisioning
