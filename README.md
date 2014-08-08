@@ -34,4 +34,4 @@ It currently works but generates an inflexible Jekyll post file in a specific lo
 - Site Provisioning
 - [One click deploy](https://blog.heroku.com/archives/2014/8/7/heroku-button)
 - Administration Pannel
-- Conflict Management and 3 way merges.
+- Automated Conflict Management and 3 way merges.
