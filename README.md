@@ -32,3 +32,6 @@ It currently works but generates an inflexible Jekyll post file in a specific lo
 - Flexible pathing.
 - Static Site Generator Agnostic
 - Site Provisioning
+- [One click deploy](https://blog.heroku.com/archives/2014/8/7/heroku-button)
+- Administration Pannel
+- Conflict Management and 3 way merges.
