@@ -35,3 +35,4 @@ It currently works but generates an inflexible Jekyll post file in a specific lo
 - [One click deploy](https://blog.heroku.com/archives/2014/8/7/heroku-button)
 - Administration Pannel
 - Automated Conflict Management and 3 way merges.
+- Migrate from express to [Hapi](https://github.com/hapijs/hapi)
