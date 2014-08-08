@@ -5,7 +5,7 @@ gitpub
 [![Dependency Status](https://gemnasium.com/bcomnes/gitpub.svg)](https://gemnasium.com/bcomnes/gitpub)
 
 
-An experimental publishing tool that takes incoming http requests, authorizes them and then turns them into static content files inside a remote git repository for later consumption by a static site generator running in a [gh-pages](https://pages.github.com/) like environment or a dynamic web app that renders content from static files on disk.
+An experimental publishing tool that takes incoming http requests, authorizes them and then turns them into static files inside a remote git repository for later consumption by a static site generator running in a [gh-pages](https://pages.github.com/) like environment or a dynamic web app that renders content from static files on disk.
 
 It currently works but generates an inflexible Jekyll post file in a specific location in a repository and is undocumented!
 
