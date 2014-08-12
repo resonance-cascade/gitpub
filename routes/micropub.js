@@ -15,24 +15,26 @@ var settings = require('../settings');
 
 /* GET micropub landing page */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Gitpub µPub Endpoint' });
+  res.render('micropub', { title: 'Gitpub µPub Endpoint' });
 });
 
 /* POST micropub */
-router.post('/',  authorize,multiParse,stagePost,publishPost,function(req, res) {
-  res.set('Location', url.parse([settings.domain + req.slug].join('')).format());
-  res.status(201).send('Created Post at ' + [settings.domain + req.slug].join(''));
-                  });
+router.post('/',  authorize,
+                  multiParse,
+                  stagePost,publishPost,
+                  microRes);
 
-/* GET Test Form */
-router.get('/post', function(req, res) {
-  res.render('post');
-});
+function microRes (req, res) {
+  res.set('Location', postUrl());
+  res.status(201).send('Created Post at ' + postString());
 
-/* POST Test form */
-router.post('/post',authorize,multiParse,stagePost,publishPost, function(req, res) {
-  res.set('Location', url.parse([settings.domain + req.slug].join('')));
-  res.status(201).send('Created Post at ' + [settings.domain + req.slug].join(''));
-})
+  function postUrl() {
+    return url.parse([settings.domain + req.slug].join('')).format();
+  }
+
+  function postString() {
+    return [settings.domain + req.slug].join('');
+  }
+}
 
 module.exports = router;
