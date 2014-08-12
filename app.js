@@ -2,12 +2,13 @@ var express = require('express');
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
-var bodyParser = require('body-parser');  // Does not handle multipart
+var bodyParser = require('body-parser');
 var busboy =  require('connect-busboy');
-var debug = require('debug')('gitpub:app'); // Isn't there a simpler debug logger out there?
+var debug = require('debug')('gitpub:app');
 
 var routes = require('./routes/index');
 var micropub = require('./routes/micropub');
+var post = require('./routes/post');
 
 var app = express();
 
@@ -23,9 +24,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Routes
 app.use('/', routes);
 app.use('/micropub', micropub);
-//app.use('/test', test);  //TODO: Test forms
-//app.use('/webmention', webmention); //TODO: webmention client
-//app.use('/post', post); //TODO: posting client
+app.use('/post', post);
+//TODO: webmention client
+
 
 /// catch 404 and forwarding to error handler
 app.use(function(req, res, next) {
