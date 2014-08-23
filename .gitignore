@@ -27,3 +27,4 @@ node_modules
 repo/*
 *.sublime-project
 *.sublime-workspace
+.DS_Store
