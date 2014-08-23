@@ -4,7 +4,7 @@
   "description": "A simple git based micropub endpoint",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node_modules/.bin/mocha",
     "start": "node ./bin/www",
     "dev": "DEBUG=gitpub*,routes:*,lib:* ENV=development node ./bin/www",
     "devmon": "DEBUG=gitpub*,routes:*,lib:* ENV=development nodemon ./bin/www",
