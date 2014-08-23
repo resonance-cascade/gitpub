@@ -1,6 +1,6 @@
 {
   "name": "gitpub",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A simple git based micropub endpoint",
   "main": "index.js",
   "scripts": {
@@ -37,7 +37,11 @@
     "moment": "^2.6.0",
     "morgan": "^1.2.1",
     "request": "^2.35.0",
-    "static-favicon": "^2.0.0-alpha",
+    "serve-favicon": "^2.0.1",
     "type-is": "^1.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^1.21.4",
+    "request-mocha": "^0.2.0"
   }
 }
