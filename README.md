@@ -1,9 +1,9 @@
 gitpub
 ======
 
-[![Build Status](http://img.shields.io/travis/bcomnes/gitpub.svg?style=flat-square)](https://travis-ci.org/bcomnes/gitpub)
-[![Dependency Status](https://david-dm.org/bcomnes/gitpub.svg?style=flat)](https://david-dm.org/bcomnes/gitpub)
-[![Dev Dependency Status](http://img.shields.io/david/dev/bcomnes/gitpub.svg?style=flat-square)](https://david-dm.org/bcomnes/gitpub)
+[![Build Status](https://travis-ci.org/bcomnes/gitpub.svg?branch=master)](https://travis-ci.org/bcomnes/gitpub)
+[![Dependency Status](https://david-dm.org/bcomnes/gitpub.svg?style)](https://david-dm.org/bcomnes/gitpub)
+[![devDependency Status](https://david-dm.org/bcomnes/gitpub/dev-status.svg)](https://david-dm.org/bcomnes/gitpub#info=devDependencies)
 [![Code Climate](https://codeclimate.com/github/bcomnes/gitpub/badges/gpa.svg)](https://codeclimate.com/github/bcomnes/gitpub)
 [![Test Coverage](https://codeclimate.com/github/bcomnes/gitpub/badges/coverage.svg)](https://codeclimate.com/github/bcomnes/gitpub)
 
