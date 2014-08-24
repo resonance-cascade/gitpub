@@ -4,7 +4,7 @@ var httpUtils = require('request-mocha')(request);
 
 var server = require('../lib/server')
 
-describe('After the server starts', function() {
+describe('Start the server', function() {
   before(server.start);
 
   httpUtils.save('http://localhost:3000/');
