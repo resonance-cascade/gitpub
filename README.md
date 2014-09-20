@@ -6,6 +6,7 @@ gitpub
 [![devDependency Status](https://david-dm.org/bcomnes/gitpub/dev-status.svg)](https://david-dm.org/bcomnes/gitpub#info=devDependencies)
 [![Code Climate](https://codeclimate.com/github/bcomnes/gitpub/badges/gpa.svg)](https://codeclimate.com/github/bcomnes/gitpub)
 [![Test Coverage](https://codeclimate.com/github/bcomnes/gitpub/badges/coverage.svg)](https://codeclimate.com/github/bcomnes/gitpub)
+[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
 
 An experimental publishing tool that takes incoming http requests, authorizes them and then turns them into static files inside a remote git repository for later consumption by a static site generator running in a [gh-pages](https://pages.github.com/) like environment or a dynamic web app that renders content from static files on disk.
 
@@ -37,4 +38,5 @@ It currently works but generates an inflexible Jekyll post file in a specific lo
 - [One click deploy](https://blog.heroku.com/archives/2014/8/7/heroku-button)
 - Administration Pannel
 - Automated Conflict Management and 3 way merges.
+- Get added to the [Fork n Go](http://jlord.github.io/forkngo/) listing
 - Migrate from express to [Hapi](https://github.com/hapijs/hapi)
