@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var url = require('url');
+var formEncoder = require('form-urlencoded');
 
 var authorize = require('../lib/authorize');
 var multiParse = require('../lib/multiParse');
@@ -15,7 +16,16 @@ var settings = require('../settings');
 
 /* GET micropub landing page */
 router.get('/', function(req, res) {
-  res.render('micropub', { title: 'Gitpub µPub Endpoint' });
+  switch (req.query['q']){
+    case "syndicate-to":
+      res.set('Content-Type', 'application/x-www-form-urlencoded');
+      res.send(
+        formEncoder.encode({'syndicate-to': settings.syndicateTo.join(',')})
+        );
+      break;
+    default:
+      res.render('micropub', { title: 'Gitpub µPub Endpoint' });
+  }
 });
 
 /* POST micropub */

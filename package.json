@@ -4,14 +4,14 @@
   "description": "A simple git based micropub endpoint",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha",
+    "test": "node_modules/.bin/mocha",
+    "cover": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha",
     "start": "node bin/www",
     "dev": "DEBUG=gitpub*,routes:*,lib:* ENV=development node ./bin/www",
     "devmon": "DEBUG=gitpub*,routes:*,lib:* ENV=development nodemon ./bin/www",
     "debug": "DEBUG=gitpub*,routes:*,lib:* ENV=development node-debug ./bin/www",
     "windev": "win-spawn DEBUG=gitpub*,routes:*,lib:* ENV=development nodemon ./bin/www",
-    "production": "ENV=production node ./bin/www",
-    "bloop": ""
+    "production": "ENV=production node ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,7 @@
     "debug": "^1.0.4",
     "ejs": "^1.0.0",
     "express": "4.8.1",
+    "form-urlencoded": "0.0.6",
     "fs-extra": "^0.11.0",
     "git-wrapper": "^0.1.1",
     "jade": "^1.5.0",

@@ -7,5 +7,6 @@
   "tokenUrl": "https://tokens.oauth.net/token",
   "email": "bcomnes@gmail.com",
   "name": "Bret Comnes",
-  "mediaFolder": "media"
+  "mediaFolder": "media",
+  "syndicateTo": [ "twitter.com/bretolius" ]
 }
