@@ -17,6 +17,7 @@ It currently works but generates an inflexible Jekyll post file in a specific lo
 - [micropub](http://indiewebcamp.com/micropub) (posting)
 - Simple File handling for small files in git.
 - Support for a simple jekyll post schema.
+- Syndication (POSSE) to twitter
 
 ## On the table:
 

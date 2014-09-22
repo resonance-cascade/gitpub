@@ -41,6 +41,7 @@
     "morgan": "^1.2.1",
     "request": "^2.35.0",
     "serve-favicon": "^2.0.1",
+    "twitter": "^0.2.12",
     "type-is": "^1.2.0"
   },
   "devDependencies": {
