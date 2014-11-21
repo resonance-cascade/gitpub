@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "description": "A simple git based micropub endpoint",
   "main": "index.js",
-  "scripts": {
-    "test": "node_modules/.bin/mocha",
-    "cover": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha",
+
+    "test": "mocha",
+    "cover": "istanbul cover _mocha",
     "start": "node bin/www",
     "dev": "DEBUG=gitpub*,routes:*,lib:* ENV=development node ./bin/www",
     "devmon": "DEBUG=gitpub*,routes:*,lib:* ENV=development nodemon ./bin/www",
