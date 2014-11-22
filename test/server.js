@@ -1,64 +1,56 @@
-var assert = require('assert');
 var request = require('request');
-var httpUtils = require('request-mocha')(request);
 var formEncoder = require('form-urlencoded');
+var test = require('tape');
 
 var server = require('../lib/server')
 
 var settings = require('../settings.js')
 
-describe('Start the server', function() {
-  before(server.start);
-  this.timeout(10000);
+var before = test;
+var after = test;
 
-  describe('GET /', function() {
-    httpUtils.save('http://localhost:3000/');
+before("start the server", function(t) {
+  t.plan(1);
+  server.start(function() {
+    t.pass('The server started');
+  })
+})
 
-    it ('should respond without error', function() {
-      assert(this.err === null)
-    });
+test('GET /', function(t) {
+  t.plan(3);
+  request('http://localhost:3000/', function(err, res, body) {
+    t.equal(err, null, 'should be error free');
+    t.equal(res.statusCode, 200, 'should respond with 200');
+    var msg = 'should respond with "Welcome to Gitpub"';
+    t.assert(res.body.indexOf("Welcome to Gitpub") > -1, msg);
+  })
+})
 
-    it ('should respond with 202 status code', function() {
-      assert(this.res.statusCode === 200);
-    });
-
-    it ('should respond with "Welcome to Gitpub"', function(){
-      var pos = this.body.indexOf("Welcome to Gitpub")
-      assert(pos > -1 )
-    })
+test('GET /micropub', function(t){
+  t.plan(3);
+  request('http://localhost:3000/micropub', function(err, res, body) {
+    t.equal(err, null, 'should be error free');
+    t.equal(res.statusCode, 200, 'should respond with 200');
+    var msg = 'should respond with "...µPub Endpoint"';
+    t.assert(res.body.indexOf("Welcome to Gitpub µPub Endpoint") > -1, msg);
   });
+})
 
-  describe('GET /micropub', function() {
-    httpUtils.save('http://localhost:3000/micropub');
-
-    it ('should respond without error', function() {
-      assert(this.err === null)
-    });
-
-    it ('should respond with 202 status code', function() {
-      assert(this.res.statusCode === 200);
-    });
-
-    it ('should respond with "...µPub Endpoint"', function(){
-      var pos = this.body.indexOf("Welcome to Gitpub µPub Endpoint")
-      assert(pos > -1 )
-    })
+test('GET /micropub?q=syndicate-to', function(t){
+  t.plan(3);
+  request('http://localhost:3000/micropub?q=syndicate-to', function(err, res, body) {
+    t.equal(err, null, 'should be error free');
+    t.equal(res.statusCode, 200, 'should respond with 200');
+    var expected = formEncoder.encode({'syndicate-to': settings.syndicateTo.join(',')});
+    var msg = 'should response with csv syndicate-to list'
+    t.equal(expected, res.body, msg);
   });
-
-  describe('GET /micropub?q=syndicate-to', function() {
-    httpUtils.save('http://localhost:3000/micropub?q=syndicate-to');
-
-    it ('should respond without error', function() {
-      assert(this.err === null)
-    });
-    it ('should respond with 202 status code', function() {
-      assert(this.res.statusCode === 200);
-    });
-    it ('should response with csv syndicate-to list', function() {
-      var expected = formEncoder.encode({'syndicate-to': settings.syndicateTo.join(',')});
-      assert(this.res.body === expected);
-    })
-  });
-
-  after(server.stop);
 });
+
+after("stop the server", function(t) {
+  t.plan(1);
+  server.stop(function() {
+    t.pass('the server stopped');
+  })
+})
+

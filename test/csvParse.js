@@ -1,44 +1,33 @@
-var assert = require('assert');
+var test = require('tape')
 var csvParse = require('../lib/csvParse');
 
-describe('The csvParse route', function() {
+test('The csvParse route', function(t) {
   var req = {};
   var res = {};
   req.body = {};
 
-  afterEach(function() {
-    // Clear the req.body object.
-    req.body = {};
-  });
+  t.test('with populated arrays', function(t) {
 
-  describe('with populated csv parameters', function() {
+    t.plan(3);
+    req.body.syndication = "hey,hi,heep",
+    req.body['syndicate-to'] = "bleep,bloop,blop"
 
-    before(function() {
-      req.body.syndication = "hey,hi,heep"
-      req.body['syndicate-to'] = "bleep,bloop,blop"
-    });
-
-    it ('should result in two arrays', function(done) {
-      csvParse(req,res,function(err) {
-        assert(req.body.syndication instanceof Array)
-        assert(req.body['syndicate-to'] instanceof Array)
-        done();
-      });
+    csvParse(req,res, function(err) {
+      t.assert(!err, 'should be error free');
+      t.assert(req.body.syndication instanceof Array, 'req.body.syndication should be an array')
+      t.assert(req.body['syndicate-to'] instanceof Array, "req.body['syndicate-to'] should be an array")
     })
-
   })
 
-  describe('with an empty paramter', function() {
-    before(function() {
-      req.body.syndication = "hey,hi,heep"
-    });
+  t.test('with an empty parameter', function(t) {
+    t.plan(3);
+    req.body = {};
+    req.body.syndication = "hey,hi,heep"
 
-    it('should result in one arrray and one undefined value', function(done) {
-      csvParse(req,res, function(err) {
-        assert(req.body.syndication instanceof Array)
-        assert(typeof req.body['syndicate-to'] === "undefined")
-        done();
-      })
+    csvParse(req,res, function(err) {
+      t.assert(!err, 'should be error free');
+      t.assert(req.body.syndication instanceof Array, "req.body.syndication should be an array");
+      t.assert(typeof req.body['syndicate-to'] === "undefined", "req.body['syndicate-to'] should be undefined");
     })
 
   })
