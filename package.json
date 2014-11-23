@@ -7,6 +7,7 @@
   "scripts": {
     "test": "tape test/*.js | tap-spec",
     "cover": "istanbul cover tape test/*.js",
+    "travis": "istanbul cover tape test/*.js | tap-spec",
     "submitCover": "cat coverage/lcov.info | codeclimate",
     "start": "node bin/www",
     "dev": "DEBUG=gitpub*,routes:*,lib:* ENV=development node ./bin/www",
