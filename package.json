@@ -54,6 +54,7 @@
   "devDependencies": {
     "codeclimate-test-reporter": "0.0.3",
     "istanbul": "^0.3.0",
+    "node-mocks-http": "^1.2.1",
     "tap-spec": "^2.1.0",
     "tape": "^3.0.3"
   },
