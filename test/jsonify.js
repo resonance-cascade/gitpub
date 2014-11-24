@@ -1,11 +1,12 @@
 var test = require('tape')
-var fieldSplit = require('../lib/fieldSplit');
+var fieldSplit = require('../lib/jsonify');
 
-test('The csvParse route', function(t) {
+test('The jsonify middleware', function(t) {
 
   var req;
   var res;
-  function init () {
+
+  function init() {
     req = {};
     res = {};
     req.body = {};
@@ -22,7 +23,7 @@ test('The csvParse route', function(t) {
     req.body.category = "camera,instagram,photo,athing";
     req.tokenData.scope = 'post';
 
-    fieldSplit(req,res, function(err) {
+    fieldSplit(req, res, function(err) {
       t.assert(!err, 'should be error free');
       t.assert(req.body.syndication instanceof Array, 'req.body.syndication should be an array')
       t.equal(req.body.syndication.length, 3, 'syndication array should be length 3')
@@ -40,7 +41,7 @@ test('The csvParse route', function(t) {
     init();
     req.body.syndication = "hey,hi,heep"
 
-    fieldSplit(req,res, function(err) {
+    fieldSplit(req, res, function(err) {
       t.assert(!err, 'should be error free');
       t.assert(req.body.syndication instanceof Array, "req.body.syndication should be an array");
       t.assert(typeof req.body['syndicate-to'] === "undefined", "req.body['syndicate-to'] should be undefined");
