@@ -3,12 +3,14 @@ node_js:
   - "0.10"
 
 before_scriopt:
-  - echo 'Canada/Pacific' | sudo tee /etc/timezone
+  # Set time zones
+  - echo 'America/Los_Angeles' | sudo tee /etc/timezone
   - sudo dpkg-reconfigure --frontend noninteractive tzdata
-  - sudo ntpdate ntp.ubuntu.com
 
 script:
+  # Run the tests/coverage
   - npm run travis
 
 after_script:
+  # Send the coverage to codeclimate
   - npm run submitCover
