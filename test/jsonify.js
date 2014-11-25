@@ -48,15 +48,17 @@ test('The jsonify middleware', function(t) {
   })
 
   t.test('with an empty parameter', function(t) {
-    t.plan(4);
+    t.plan(5);
     init();
     req.body.syndication = "hey,hi,heep"
+    req.body['syndicate-to'] = "http://instagram.com/p/toorXxxfoq/";
 
     fieldSplit(req, res, function(err) {
       t.assert(!err, 'should be error free');
       t.assert(req.body.syndication instanceof Array, "req.body.syndication should be an array");
-      t.assert(typeof req.body['syndicate-to'] === "undefined", "req.body['syndicate-to'] should be undefined");
+      t.assert(req.body['syndicate-to'] instanceof Array, "req.body['syndicate-to'] should be an array");
       t.assert(typeof req.body.category === "undefined", "req.body.category should be undefined");
+      t.assert(req.body['syndicate-to'].length === 1, "syndicate-to array length == 1");
     })
 
   })

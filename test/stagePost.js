@@ -43,8 +43,8 @@ test('Ownyourgram request through stagePost route', function(t) {
   stagePost(req, res, function(err) {
     t.assert(!err, 'should be error free');
     t.equal(req.body.tcontent, 'A quick oneliner note!', 'correct title content')
-    t.equal(req.body.postFileName, '2014-10-23-a-quick-oneliner-note.md', 'correct fileName')
-    t.equal(req.slug, '/2014/10/23/a-quick-oneliner-note', 'expected slug')
+    t.equal(req.body.postFileName, req.body.published.format('YYYY-MM-DD') + '-a-quick-oneliner-note.md', 'correct fileName')
+    t.equal(req.slug, '/' + req.body.published.format('YYYY/MM/DD') + '/a-quick-oneliner-note', 'expected slug')
     t.equal(req.fmObj.date, '2014-10-23 20:17', 'front-matter date should be correct')
   })
 })
