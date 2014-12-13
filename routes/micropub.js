@@ -16,25 +16,29 @@ var settings = require('../settings');
 
 /* GET micropub landing page */
 router.get('/', function(req, res) {
-  switch (req.query['q']){
+  switch (req.query['q']) {
     case "syndicate-to":
       res.set('Content-Type', 'application/x-www-form-urlencoded');
       res.send(
-        formEncoder.encode({'syndicate-to': settings.syndicateTo.join(',')})
-        );
+        formEncoder.encode({
+          'syndicate-to': settings.syndicateTo.join(',')
+        })
+      );
       break;
     default:
-      res.render('micropub', { title: 'Gitpub µPub Endpoint' });
+      res.render('micropub', {
+        title: 'Gitpub µPub Endpoint'
+      });
   }
 });
 
 /* POST micropub */
-router.post('/',  authorize,
-                  multiParse,
-                  stagePost,publishPost,
-                  microRes);
+router.post('/', authorize(settings.tokenUrl, settings.domain),
+  multiParse,
+  stagePost, publishPost,
+  microRes);
 
-function microRes (req, res) {
+function microRes(req, res) {
   res.set('Location', postUrl());
   res.status(201).send('Created Post at ' + postString());
 
