@@ -9,8 +9,11 @@ var makeGit = require('../lib/git')
 var temp = path.join(__dirname, 'tmp')
 var repoName = 'testRepo';
 var workTree = path.join(temp, repoName)
+var cloneName = 'cloneRepo';
+var cloneTree = path.join(temp, cloneName);
 
 var git;
+var clone;
 
 test("ensure clean directory", function(t) {
   if (fs.existsSync(temp)) {
@@ -72,16 +75,23 @@ test("run a file command w/ options", function(t) {
   t.plan(1);
   git(['status'], {
     timeout: 15000
-},  function(err, stdout, stderr) {
+  }, function(err, stdout, stderr) {
     t.error(err, 'array command sucessfully run');
     debug(stdout);
     debug(stderr);
   })
 })
 
-test("remove test repo", function(t) {
-
+test("clone testRepo", function(t) {
+  t.plan(1);
+  clone = makeGit(cloneTree);
+  clone.clone(workTree, function(err, stdout, stderr) {
+    t.error(err, 'repo cloned')
+    debug(stdout);
+    debug(stderr);
+  })
 })
+
 
 test("clean up", function(t) {
   t.plan(1);
