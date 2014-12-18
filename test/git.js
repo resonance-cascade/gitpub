@@ -1,15 +1,16 @@
 var test = require('tape');
-var Git = require('../lib/git')
 var path = require('path');
 var fs = require('fs-extra');
 var cp = require('child_process');
 var debug = require('debug');
-var git;
 
+var makeGit = require('../lib/git')
 
 var temp = path.join(__dirname, 'tmp')
 var repoName = 'testRepo';
 var workTree = path.join(temp, repoName)
+
+var git;
 
 test("ensure clean directory", function(t) {
   if (fs.existsSync(temp)) {
@@ -23,24 +24,17 @@ test("ensure clean directory", function(t) {
   }
 })
 
-test("create tmp folders", function(t) {
+test("create git object", function(t) {
   t.plan(1);
-  fs.ensureDir(workTree, function(err) {
-    t.error(err, 'workTree created');
-  })
+  git = makeGit(workTree);
+  t.pass('git instance created');
 })
 
 test("init test repo", function(t) {
   t.plan(1);
-  cp.exec('git init ' + workTree, function(err, stdout, stderr) {
+  git.init(function(err, stdout, stderr) {
     t.error(err, 'initialzed test repo');
   })
-})
-
-test("create git object", function(t) {
-  t.plan(1);
-  git = new Git(workTree);
-  t.pass('git instance created');
 })
 
 test("run a string command", function(t) {
@@ -78,11 +72,15 @@ test("run a file command w/ options", function(t) {
   t.plan(1);
   git(['status'], {
     timeout: 15000
-  }, function(err, stdout, stderr) {
+},  function(err, stdout, stderr) {
     t.error(err, 'array command sucessfully run');
     debug(stdout);
     debug(stderr);
   })
+})
+
+test("remove test repo", function(t) {
+
 })
 
 test("clean up", function(t) {
