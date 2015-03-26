@@ -17,6 +17,13 @@ It currently works but generates an inflexible Jekyll post file in a specific lo
 - [micropub](http://indiewebcamp.com/micropub) (posting)
 - Simple File handling for small files in git.
 - Support for a simple jekyll post schema.
+- 
+
+## Active Development
+
+- Breaking down into small modules:
+  - https://www.npmjs.com/package/quick-gits
+  - https://www.npmjs.com/package/bepo
 
 ## On the table:
 
