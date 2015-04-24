@@ -1,12 +1,25 @@
 gitpub
 ======
 
-[![Build Status](https://travis-ci.org/bcomnes/gitpub.svg?branch=master)](https://travis-ci.org/bcomnes/gitpub)
-[![Dependency Status](https://david-dm.org/bcomnes/gitpub.svg?style)](https://david-dm.org/bcomnes/gitpub)
-[![devDependency Status](https://david-dm.org/bcomnes/gitpub/dev-status.svg)](https://david-dm.org/bcomnes/gitpub#info=devDependencies)
-[![Code Climate](https://codeclimate.com/github/bcomnes/gitpub/badges/gpa.svg)](https://codeclimate.com/github/bcomnes/gitpub)
-[![Test Coverage](https://codeclimate.com/github/bcomnes/gitpub/badges/coverage.svg)](https://codeclimate.com/github/bcomnes/gitpub)
-[![experimental](http://badges.github.io/stability-badges/dist/experimental.svg)](http://github.com/badges/stability-badges)
+[![release][release-image]][release-url]
+[![npm][npm-image]][npm-url]
+[![travis][travis-image]][travis-url]
+[![coverage][coverage-image]][coverage-url]
+[![david][david-image]][david-url]
+[![stability][stability-image]][stability-url]
+
+[release-image]: https://img.shields.io/github/release/bcomnes/gitpub.svg?style=flat-square
+[release-url]: https://github.com/bcomnes/gitpub/releases/latest
+[npm-image]: https://img.shields.io/npm/v/gitpub.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/gitpub
+[travis-image]: https://img.shields.io/travis/bcomnes/gitpub.svg?style=flat-square
+[travis-url]: https://travis-ci.org/bcomnes/gitpub
+[coverage-image]: https://img.shields.io/codeclimate/coverage/github/bcomnes/gitpub.svg?style=flat-square
+[coverage-url]: https://codeclimate.com/github/bcomnes/gitpub
+[david-image]: https://img.shields.io/david/bcomnes/gitpub.svg?style=flat-square
+[david-url]: https://david-dm.org/bcomnes/gitpub
+[stability-image]: https://img.shields.io/badge/stability-1%20--%20experimental-orange.svg?style=flat-square
+[stability-url]: https://nodejs.org/api/documentation.html#documentation_stability_index
 
 An experimental publishing tool that takes incoming http requests, authorizes them and then turns them into static files inside a remote git repository for later consumption by a static site generator running in a [gh-pages](https://pages.github.com/) like environment or a dynamic web app that renders content from static files on disk.
 
