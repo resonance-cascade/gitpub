@@ -48,14 +48,14 @@ It currently works but generates an inflexible Jekyll post file in a specific lo
 
 - [micropub](http://indiewebcamp.com/micropub) (editing)
 - [webmention](http://indiewebcamp.com/micropub)
-- Robust file handling (S3, Dropbox, Bittorrent Sync, [Camlistore](https://camlistore.org/))
-- Advanced syndication options ([POSSE](http://indiewebcamp.com/POSSE) [PESOS](http://indiewebcamp.com/PESOS))
+- Robust file handling (S3, Dropbox, BitTorrent Sync, [Camlistore](https://camlistore.org/))
+- Advanced syndication options ([POSSE](http://indiewebcamp.com/POSSE), [PESOS](http://indiewebcamp.com/PESOS))
 - Support for arbitrary post templates and schema.
 - Flexible pathing.
 - Static Site Generator Agnostic
 - Site Provisioning
 - [One click deploy](https://blog.heroku.com/archives/2014/8/7/heroku-button)
-- Administration Pannel
+- Administration Panel
 - Automated Conflict Management and 3 way merges.
 - Get added to the [Fork n Go](http://jlord.github.io/forkngo/) listing
 - Migrate from express to [Hapi](https://github.com/hapijs/hapi)
